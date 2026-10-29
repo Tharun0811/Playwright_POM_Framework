@@ -1,0 +1,13 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+
+# Pytest cache
+.pytest_cache/
+
+# Generated test reports
+reports_failure_demo.html
+login_report.html
