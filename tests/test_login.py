@@ -25,7 +25,8 @@ def test_username_and_password_field_values(login_page):
                             pytest.param("", "", "Epic sadface: Username is required", id = "empty_credentilas"),
                             pytest.param("standard_user", "", "Epic sadface: Password is required", id ="missing_password"),
                             pytest.param("", "secret_sauce", "Epic sadface: Username is required", id= "missing_username"),
-                            pytest.param("abc", "abc", "Epic sadface: Username and password do not match any user in this service", id = "invalid_credentials")
+                            pytest.param("abc", "abc", "Epic sadface: Username and password do not match any user in this service", id = "invalid_credentials"),
+                            pytest.param("locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out.", id = "locked_out_user")
                          ])
     
 def test_login_with_missing_and_invalid_credentials(login_page, username, password, expected_error):
