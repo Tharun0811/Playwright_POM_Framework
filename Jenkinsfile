@@ -39,7 +39,7 @@ pipeline{
             steps{
                 bat '''
                 set PLAYWRIGHT_BROWSERS_PATH=C:\\Users\\Koushik\\AppData\\Local\\ms-playwright
-                .venv\\Scripts\\python.exe -m pytest tests\\test_login.py -v --html=login_report.html --self-contained-html
+                .venv\\Scripts\\python.exe -m pytest tests -v --html=login_report.html --self-contained-html
                 if errorlevel 1 exit /b 1
                 '''
             }
