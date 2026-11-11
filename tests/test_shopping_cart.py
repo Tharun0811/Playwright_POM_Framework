@@ -11,3 +11,4 @@ def test_add_product_to_shopping_cart(logged_in_user):
     expect(products_page.cart_badge()).to_have_text("1")
     products_page.open_cart()
     expect(products_page.product_in_cart(product_name)).to_be_visible()
+    expect(products_page.product_in_cart(product_name)).to_have_count(1)
