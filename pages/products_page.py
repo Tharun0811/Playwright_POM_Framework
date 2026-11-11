@@ -14,4 +14,8 @@ class ProductsPage:
 
     def product_in_cart(self, product_name):
         return self.page.locator(".cart_item").filter(has_text = product_name)
+
+    def products_page_opening_cart(self, product_name):
+        self.add_product_to_cart(product_name)
+        self.open_cart()
     
