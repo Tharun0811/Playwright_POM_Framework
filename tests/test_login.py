@@ -2,6 +2,7 @@ from pages.login_page import LoginPage
 from playwright.sync_api import expect
 import pytest 
 
+
 @pytest.mark.regression
 def test_login_page_title(login_page):
     expect(login_page.page).to_have_title("Swag Labs")
@@ -31,10 +32,15 @@ def test_username_and_password_field_values(login_page):
     
 def test_login_with_missing_and_invalid_credentials(login_page, username, password, expected_error):
     login_page.login(username, password)
-    expect(login_page.page.get_by_text(expected_error)).to_be_visible()
+    assert login_page.get_error_message() == expected_error
 
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_login_with_valid_credentials(login_page):
     login_page.login("standard_user", "secret_sauce")
     expect(login_page.page).to_have_url("https://www.saucedemo.com/inventory.html")
+
+def test_username_placeholder(login_page):
+    actual_placeholder = login_page.get_username_placeholder()
+    assert actual_placeholder == "Username"
+
