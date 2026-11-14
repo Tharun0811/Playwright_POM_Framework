@@ -45,16 +45,16 @@ pipeline{
             }
         }
 
-        stage('publish report'){
-            steps{
-                publishHTML(target:[
-                    reportDir : '.',
-                    reportFiles:'login_report.html',
-                    reportName : 'playwright test report',
-                    keepAll : true,
-                    allowMissing : false
-                ])
-            }
+    }
+    post {
+        always{
+            publishHTML(target:[
+                reportDir : '.',
+                reportFiles:'login_report.html',
+                reportName:'Playwright test report',
+                keepAll: true,
+                allowMissing:true
+            ])
         }
     }
 }

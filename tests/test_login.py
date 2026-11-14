@@ -42,5 +42,5 @@ def test_login_with_valid_credentials(login_page):
 
 def test_username_placeholder(login_page):
     actual_placeholder = login_page.get_username_placeholder()
-    assert actual_placeholder == "Username"
+    assert actual_placeholder == "WrongValue"
 
