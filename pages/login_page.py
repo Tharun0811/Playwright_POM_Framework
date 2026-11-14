@@ -1,18 +1,18 @@
-class LoginPage:
-    def __init__(self, page):
-        self.page = page 
+from pages.base_page import BasePage
+class LoginPage(BasePage):
+     
 
     def open_browser(self):
         self.page.goto("https://www.saucedemo.com/")
 
     def enter_username(self, username):
-        self.page.get_by_placeholder("Username").fill(username)
+        self.fill(self.page.get_by_placeholder("Username"), username)
 
     def enter_password(self, password):
-        self.page.get_by_placeholder("Password").fill(password)
+        self.fill(self.page.get_by_placeholder("Password"), password)
 
     def click_login_button(self):
-        self.page.get_by_role("button", name = "Login").click()
+        self.click(self.page.get_by_role("button", name = "Login"))
 
     def login(self, username, password):
 
@@ -22,17 +22,25 @@ class LoginPage:
         self.click_login_button()
 
     def is_username_field_visible(self):
-        return self.page.get_by_placeholder("Username").is_visible()
+        return self.is_visible(self.page.get_by_placeholder("Username"))
 
     def is_password_field_visible(self):
-        return self.page.get_by_placeholder("Password").is_visible()
+        return self.is_visible(self.page.get_by_placeholder("Password"))
 
     def username_value(self):
-        return self.page.get_by_placeholder("Username").input_value()
+        return self.get_input_value(self.page.get_by_placeholder("Username"))
 
     def password_value(self):
-        return self.page.get_by_placeholder("Password").input_value()
+        return self.get_input_value(self.page.get_by_placeholder("Password"))
 
+    def get_error_message(self):
+        return self.get_text(self.page.locator("[data-test='error']"))
+
+    def get_username_placeholder(self):
+        return self.get_attribute(
+        self.page.get_by_placeholder("Username"),
+        "placeholder"
+    )
     
 
     

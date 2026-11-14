@@ -1,6 +1,8 @@
 from playwright.sync_api import sync_playwright, expect 
 import pytest 
 from pages.login_page import LoginPage
+import os
+from pytest_metadata.plugin import metadata_key
 
 @pytest.fixture(scope= "session")
 def browser():
@@ -29,4 +31,17 @@ def logged_in_user(browser_context):
     login_page = LoginPage(browser_context)
     login_page.login("standard_user", "secret_sauce")
     return browser_context
-    
+
+
+def pytest_configure(config):
+    config.stash[metadata_key]["Jenkins Build Number"] = os.getenv(
+        "BUILD_NUMBER", "Local Execution"
+    )  
+
+    config.stash[metadata_key]["Jenkins Job Name"] = os.getenv(
+        "JOB_NAME", "Local Execution"
+    )
+
+    config.stash[metadata_key]["Branch Name"] = os.getenv(
+        "BRANCH_NAME", "Local Execution"
+    )
